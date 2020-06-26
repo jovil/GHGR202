@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{@site.lang}}">
+
+<head>
+  <title>{{meta_title}}</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {{!-- Dynamic header content for SEO, meta tags, code injection etc --}}
+  {{ghost_head}}
+
+  {{!-- Custom Styles --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css" />
+  <link rel="stylesheet" href="{{asset "css/style.css"}}">
+</head>
+
+<body class="{{body_class}}">
+  {{!-- Navigation bar --}}
+  <nav class="navbar fixed-top">
+    <div class="navbar-container site-wrapper site-wrapper-s">
+      <div class="navbar-primary">
+        <a class="navbar-brand" href="/">
+          <span class="navbar-logo" style="background-image: url('{{@site.logo}}')"><img class="invisible" src="{{@site.logo}}" alt="{{@site.title}}" /></span>
+          <span class="navbar-title">{{@site.title}}</span>
+          {{#post}}
+          <span class="text-muted">&nbsp;/&nbsp;</span>
+          <p>{{{t "Blog"}}}</p>
+          {{/post}}
+        </a>
+      </div>
+
+      {{#is "post, page, author, tag"}}
+      <form class="page-header-form" action="https://formspree.io/YOUR@EMAIL.HERE" method="post">
+        <input type="email" name="_replyto" id="email-address" placeholder="name@mail.com" required>
+        <input class="button" type="submit" value="Subscribe">
+        <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+      </form>
+      {{/is}}
+
+      <button id="navbar-trigger" class="navbar-trigger" type="button">
+      {{> "icons/menu"}}
+      </button>
+    </div>
+  </nav>
+
+  <div id="navbar-panel" class="navbar-panel">
+    {{#if @site.navigation}}
+    {{navigation}}
+    {{/if}}
+    <div id="navbar-skylight" class="navbar-skylight"></div>
+  </div>
+  {{!-- End Navbar --}}
+
+  {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+  {{{body}}}
+
+  {{> site-footer}}
+  {{!-- End of footer --}}
+
+  <a href="https://ghost.org/" class="published">Published with Ghost</a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js"></script>
+  <script src="{{asset "built/theme.js"}}"></script>
+  {{!-- Dynamic footer content from code injection etc --}}
+  {{ghost_foot}}
+</body>
+
+</html>

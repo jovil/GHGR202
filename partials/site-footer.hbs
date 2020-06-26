@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <div class="site-wrapper">
+    <div class="site-footer-content site-wrapper site-wrapper-s">
+      {{#if @site.secondary_navigation}}
+        <nav class="secondary-navigation">
+        {{navigation type="secondary"}}
+        </nav>
+      {{/if}}
+      <div class="site-footer-meta">
+        <div class="card">
+          <div class="card-footer text-muted">
+            &copy; {{@site.title}} {{date format="YYYY"}} 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,77 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+<main id="site-main" class="site-main">
+  <div class="site-wrapper posts">
+    {{!-- Iterate through each posts --}}
+    {{#foreach posts}}
+    
+    <article class="post-card {{post_class}}">
+      <div class="card-body">
+        <header class="post-card-header">
+          <div class="post-card-header-inner">
+            {{!-- Display primary tag of the post if exists--}}
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}" class="post-card-primary-tag">
+              {{primary_tag.name}}
+            </a>
+            {{/if}}
+            
+            <a class="post-card-link-title" href="{{url}}">
+              {{!-- Post title --}}
+              <h2>{{title}}</h2>
+            </a>
+            
+            <footer class="post-card-meta">
+              <ul class="author-list">
+                {{#foreach authors}}
+                <li class="author-list-item">
+                  <div class="author-name-tooltip">
+                    {{name}}
+                  </div>
+            
+                  {{#if profile_image}}
+                  <a href="{{url}}" class="static-avatar">
+                    <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
+                  </a>
+                  {{else}}
+                  <a href="{{url}}" class="static-avatar author-profile-image">{{> "icons/avatar"}}</a>
+                  {{/if}}
+                </li>
+                {{/foreach}}
+              </ul>
+              <div class="post-card-byline">
+                <span>{{#has author="count:>2"}}Multiple authors{{else}}{{authors}}{{/has}}</span>
+                <span class="post-card-byline-date">Posted on <time
+                    datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD"}}</time>
+                </span>
+              </div>
+            </footer>
+          </div>
+        </header>
+    
+        <div class="post-card-content">
+          {{#if feature_image}}
+          <a class="post-card-image-link" href="{{url}}">
+            <img class="post-card-image" srcset="{{img_url feature_image size="s"}} 300w,
+                                            {{img_url feature_image size="m"}} 600w,
+                                            {{img_url feature_image size="l"}} 1000w,
+                                            {{img_url feature_image size="xl"}} 2000w"
+              sizes="(max-width: 1000px) 400px, 700px" loading="lazy" src="{{img_url feature_image size="m"}}"
+              alt="{{title}}" />
+          </a>
+          {{/if}}
+    
+          {{!-- Displays post excerpt. Sets to display max 170 chars if not set --}}
+          <div class="post-card-excerpt">
+            <p class="post-excerpt">
+              {{excerpt characters="170"}}
+            </p>
+          </div>
+        </div>
+      </div>{{!--/.post-card-content--}}
+    </article>
+    {{/foreach}}
+  </div>
+</main>
